@@ -1,4 +1,5 @@
 <?php
+//ユーザがアクセスしてきたURL(path_info)をRequestクラスから受け取り、どのコントローラを呼び出すかを決定するクラス
 
 class Router {
 
@@ -8,6 +9,7 @@ class Router {
         $this->routes = $this->compileRoutes($definitions);
     }
 
+    //受け取ったルーティング定義配列中の動的パラメータ指定を正規表現で扱える形式に変換するメソッド
     public function compileRoutes($definitions) {
         $routes = array();
 
@@ -28,6 +30,7 @@ class Router {
         return $routes;
     }
 
+    //変換済みのルーティング定義配列とPATH_INFOのマッチングを行いルーティングパラセイリングの特定を行う
     public function resolve($path_info) {
         if ('/' !== substr($path_info, 0, 1)) {
             $path_info = '/' . $path_info;

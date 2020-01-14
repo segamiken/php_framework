@@ -1,10 +1,13 @@
 <?php
+//セッション情報を管理するクラス
 
 class Session
 {
     protected static $sessionStarted = false;
     protected static $sessionIdRegenerated = false;
 
+    //セッションの自動スタート
+    //複数回実行されないように静的プロパティを用いてチャックしている
     public function __construct()
     {
         if(!self::$sessionStarted) {
@@ -37,6 +40,8 @@ class Session
         $_SESSION = array();
     }
 
+    //セッションIDを新しく発行するためのsession_regenerate_idを実行
+    //複数回呼び出されないようにチェックしている
     public function regenerate($destroy = true)
     {
         if(!self::$sessionIdRegenerated) {
@@ -46,6 +51,7 @@ class Session
         }
     }
 
+    //ログイン状態の制御
     public function setAuthenticated($bool)
     {
         $this->set('_authenticated', (bool)$bool);

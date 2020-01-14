@@ -1,4 +1,5 @@
 <?php
+//データベースへの接続情報やDbRepositoryクラスを管理するクラス
 
 class DbManager {
     protected $connections = array();

@@ -1,4 +1,6 @@
 <?php
+//モデルの役割。データベースへのアクセスを伴う処理を管理するクラス。
+//データベース上のテーブルごとにDbRepositoryの子クラスを作成する。
 
 abstract class DbRepository
 {
