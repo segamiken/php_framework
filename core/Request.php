@@ -1,14 +1,17 @@
 <?php
 
-class Request {
-    public function isPost() {
+class Request 
+{
+    public function isPost() 
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             return true;
         }
         return false;
     }
 
-    public function getGet($name, $default = null) {
+    public function getGet($name, $default = null) 
+    {
         if (isset($_GET[$name])) {
             return $_GET[$name];
         }
@@ -16,32 +19,37 @@ class Request {
         return $default;
     }
 
-    public function getPost($name, $default = null) {
+    public function getPost($name, $default = null) 
+    {
         if (isset($_POST[$name])) {
             return $_POST[$name];
         }
         return $default;
     }
 
-    public function getHost() {
+    public function getHost() 
+    {
         if (!empty($_SERVER['HTTP_HOST'])) {
             return $_SERVER['HTTP_HOST'];
         }
         return $_SERVER['SERVER_NAME'];
     }
 
-    public function isSsl() {
+    public function isSsl() 
+    {
         if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
             return true;
         }
         return false;
     }
 
-    public function getRequestUrl() {
+    public function getRequestUrl() 
+    {
         return $_SERVER['REQUEST_URL'];
     }
 
-    public function getBaseUrl() {
+    public function getBaseUrl() 
+    {
         $script_name = $_SERVER['SCRIPT_NAME'];
 
         $request_uri = $this->getRequestUrl();
@@ -55,7 +63,8 @@ class Request {
         return '';
     }
 
-    public function getPathInfo() {
+    public function getPathInfo() 
+    {
         $base_url = $this->getBaseUrl();
         $request_uri = $this->getRequestUrl();
 
