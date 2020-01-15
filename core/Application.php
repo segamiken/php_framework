@@ -11,7 +11,7 @@ abstract class Application
 
 
     //３つのメソッドをまず実行
-    public function __construct()
+    public function __construct($debug = false)
     {
         $this->setDebugMode($debug);
         $this->initialize();
