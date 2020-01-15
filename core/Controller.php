@@ -1,4 +1,5 @@
 <?php
+//モデルやビューの制御を行う。
 
 abstract class Controller
 {

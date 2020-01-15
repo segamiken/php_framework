@@ -97,6 +97,7 @@ abstract class Application
     }
 
     //Routerからコントローラを特定しレスポンスの送信を行う。
+    //Routerクラスのresolveメソッドを呼び出してルーティングパラメータを取得し、コントローラとアクション名を特定する。
     public function run()
     {
     try {
@@ -110,6 +111,9 @@ abstract class Application
         $action = $params['action'];
 
         $this->runAction($controller, $action, $params);
+
+        $this->response->send();
+    
     } catch (HttpNotFoundException $e) {
         $this->render404Page($e);
 
@@ -117,7 +121,6 @@ abstract class Application
         list($controller, $action) = $this->login_action;
         $this->runAction($controller, $action);
     }
-        $this->response->send();
     }
 
     protected function render404Page($e)
@@ -143,9 +146,9 @@ abstract class Application
         );
     }
 
-    //実際にアクションを実行する
+    //実際にアクションを実行する.
     public function runAction($controller_name, $action, $params = array())
-    {
+    {   //ucfirstは先頭を大文字にする関数
         $controller_class = ucfirst($controller_name) . 'Controller';
 
         $controller = $this->findController($controller_class);
