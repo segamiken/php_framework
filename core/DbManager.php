@@ -2,6 +2,7 @@
 //データベースへの接続情報やDbRepositoryクラスを管理するクラス
 
 class DbManager {
+    //接続情報であるPDOクラスのインスタンスを配列で保持
     protected $connections = array();
 
     //データベースとの接続を行うメソッド
@@ -36,6 +37,7 @@ class DbManager {
         return $this->connections[$name];
     }
 
+    //テーブル毎のRepositoryクラスと接続名の対応を格納
     protected $repository_connection_map = array();
 
     public function setRepositoryConnectionMap($repository_name, $name) 
@@ -43,6 +45,7 @@ class DbManager {
         $this->repository_connection_map[$repository_name] = $name;
     }
 
+    //Repositoryクラスに対応する接続を取得しようとした際に、$repository_connection_mapに設定されているものはgetConnetctionメソッドに接続名を指定し、それ以外は最初に作成したものを取得する。
     public function getConnectionForRepository($repository_name) 
     {
         if (isset($this->repository_connection_map[$repository_name])) {
@@ -54,6 +57,7 @@ class DbManager {
         return $con;
     }
 
+    //Repositoryクラスの管理
     protected $repositories = array();
 
     public function get($repository_name) 
@@ -68,6 +72,7 @@ class DbManager {
         }
     }
 
+    //データベースとの接続を開放する処理
     public function __destruct()
     {
         foreach ($this->repositories as $repository) {

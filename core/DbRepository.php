@@ -24,11 +24,13 @@ abstract class DbRepository
         return $stmt;
     }
 
+    //fetch()メソッドは1行のみを取得するメソッド
     public function fetch($sql, $params = array())
     {
         return $this->execute($sql, $params)->fetch(PDO::FETCH_ASSOC);
     }
 
+    //fetchAll()はすべての行を取得するメソッド
     public function fetchAll($sql, $params = array())
     {
         return $this->execute($sql, $params)->fetchAll(PDO::FETCH_ASSOC);
